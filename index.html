@@ -1,44 +1,1635 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Parachute Robots · Programming Playground</title>
-<style>
-:root{color-scheme:dark;--bg:#08111e;--panel:#101e30;--panel2:#14263a;--line:#294259;--text:#edf6ff;--muted:#a2b8ce;--cyan:#5dd7ef;--orange:#ffb36b;--good:#73e3a5;--danger:#ff8194;--purple:#b6a1ff}*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 90% 0,#18344b 0,transparent 40%),var(--bg);color:var(--text);font:14px/1.5 system-ui,-apple-system,Segoe UI,Arial,sans-serif}button,select,input,textarea{font:inherit}button{cursor:pointer;border:1px solid var(--line);border-radius:9px;padding:9px 13px;background:#1a3248;color:var(--text);font-weight:650}button:hover:not(:disabled){border-color:var(--cyan);background:#24415b}button:disabled{opacity:.42;cursor:not-allowed}button.primary{background:#1b8197;border-color:#54cee3;color:#fff}button.good{background:#19644b;border-color:#4db78c}button.danger{color:#ffd3dc}button.small{padding:6px 9px;font-size:12px}.shell{max-width:1600px;margin:auto;padding:22px}.header{display:flex;justify-content:space-between;gap:18px;align-items:flex-start;margin-bottom:19px}.eyebrow{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--cyan);font-weight:800}.header h1{font-size:clamp(24px,3vw,34px);line-height:1.1;margin:6px 0}.subtitle{margin:0;color:var(--muted);max-width:850px}.header .pill{border:1px solid #426478;border-radius:30px;padding:7px 12px;color:#b8edfb;white-space:nowrap}.layout{display:grid;grid-template-columns:minmax(330px, 1.03fr) minmax(420px,1.5fr) minmax(285px,.9fr);gap:15px;align-items:start}.panel{background:linear-gradient(140deg,#142439,#0c1a2b);border:1px solid var(--line);border-radius:14px;box-shadow:0 12px 28px #0002;overflow:hidden}.panelHead{display:flex;align-items:center;justify-content:space-between;gap:10px;border-bottom:1px solid var(--line);padding:13px 16px}.panelHead h2{font-size:15px;margin:0}.panelHead small{color:var(--muted)}.content{padding:15px}.badge{font-size:11px;border-radius:15px;padding:3px 9px;border:1px solid #46617b;color:#b7d5ec;font-weight:700}.editorWrap{display:flex;min-height:340px;background:#081321;border:1px solid #35506a;border-radius:10px;overflow:hidden}.lines{white-space:pre;text-align:right;padding:13px 9px;min-width:35px;color:#587891;line-height:23px;user-select:none;border-right:1px solid #1c3349;font:13px/23px ui-monospace,Consolas,monospace;overflow:hidden}.editor{resize:vertical;min-height:340px;width:100%;padding:13px 12px;line-height:23px;border:0;background:transparent;color:#e2f2ff;outline:none;white-space:pre;tab-size:2;font:13px/23px ui-monospace,Consolas,monospace}.editor:focus{box-shadow:inset 0 0 0 1px #4e98a9}.row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.row.between{justify-content:space-between}.btnbar{margin-top:12px}.helpText{color:var(--muted);font-size:12px}.status{border-radius:9px;padding:10px 12px;margin-top:12px;background:#162b3f;color:#bcd3e4;min-height:44px;border:1px solid #324f65}.status.ok{color:#a0f4c6;border-color:#328565;background:#10382d}.status.err{color:#ffc1cb;border-color:#a14d5f;background:#3d202e}.codeError{font:12px/1.6 ui-monospace,monospace;color:#ffc6cf;white-space:pre-wrap}.simTop{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px}.metric{background:#0a1827;border:1px solid #264156;border-radius:9px;padding:10px}.metric span{color:var(--muted);font-size:11px;display:block}.metric strong{font-size:20px;font-variant-numeric:tabular-nums}.canvasWrap{position:relative;background:radial-gradient(circle at 50% 50%,#142c40 0,#091726 80%);border:1px solid #315069;border-radius:12px;overflow:hidden}canvas{display:block;width:100%;height:310px}.legend{display:flex;gap:15px;flex-wrap:wrap;margin-top:9px;color:var(--muted);font-size:12px}.dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px}.settings{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:15px}.settings label{color:var(--muted);font-size:12px;display:block}.settings input,.settings select{width:100%;margin-top:5px;color:var(--text);background:#081827;border:1px solid #35526c;border-radius:8px;padding:8px}.settings input[type=range]{padding:0;accent-color:var(--cyan)}.settings .wide{grid-column:1/-1}.pcGrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:13px}.pc{border:1px solid #304b63;border-radius:9px;padding:10px;background:#0a1929}.pc h3{font-size:12px;margin:0 0 5px}.pc p{margin:3px 0;font:12px/1.5 ui-monospace,monospace;color:#a8c4da}.pc b{color:white}.log{margin-top:13px;max-height:165px;overflow:auto;background:#081725;border:1px solid #254258;border-radius:8px;padding:9px 11px;font:12px/1.65 ui-monospace,monospace;color:#b7cfe0}.log p{margin:0;border-bottom:1px solid #182e40;padding:2px 0}.log p:last-child{border:0}.tabs{display:flex;gap:5px}.tabs button{padding:5px 9px;font-size:12px}.tabs button.active{background:#245168;border-color:var(--cyan)}.tabPane{display:none}.tabPane.active{display:block}.intro{margin:0 0 13px;color:#c6d9e9}.instruction{border:1px solid #29465b;border-radius:9px;margin-bottom:9px;padding:10px;background:#0b1b2b}.instruction code{color:#84e1fa;font-weight:800}.instruction p{margin:5px 0 0;color:#abc1d4;font-size:12px}.instruction .example{color:#e7c7ff}.callout{background:#213449;border-left:3px solid var(--cyan);padding:10px 12px;border-radius:7px;margin:12px 0;font-size:12px;color:#cae1f2}.tests{margin-top:14px}.testResults{max-height:185px;overflow:auto;font-size:12px}.testCase{padding:7px 3px;border-bottom:1px solid #263f52;display:flex;justify-content:space-between}.testPass{color:var(--good)}.testFail{color:var(--danger)}.hint{display:none;margin:8px 0;padding:10px;background:#112c3c;border-radius:7px;color:#c9e6ef;font-size:12px}.hint.show{display:block}.footer{color:#799bb4;font-size:11px;text-align:center;margin:18px 0}.shortcut{font:11px ui-monospace,monospace;color:#a9c5d6}.fullWidth{width:100%}@media(max-width:1250px){.layout{grid-template-columns:1fr 1fr}.side{grid-column:1/-1}.side .content{display:grid;grid-template-columns:1fr 1fr;gap:15px}.side .tabs{grid-column:1/-1}.side .tabPane{grid-column:1/-1}}@media(max-width:760px){.shell{padding:10px}.layout{display:block}.panel{margin-bottom:12px}.side .content{display:block}.header .pill{display:none}.settings{grid-template-columns:1fr 1fr}canvas{height:250px}}@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
-</style>
-</head>
-<body><main class="shell">
-<header class="header"><div><div class="eyebrow">Experis Academy · Algorithmic Reasoning Lab</div><h1>Parachute Robots <span style="color:var(--cyan)">/</span> Coding Playground</h1><p class="subtitle">Two identical robots. One shared program. An infinite number line. Can you guarantee they rendezvous using only four CPU instructions?</p></div><div class="pill">● Offline · Single HTML file</div></header>
-<div class="layout">
-<section class="panel"><div class="panelHead"><h2>01 / Program editor</h2><span class="badge">Shared by both robots</span></div><div class="content"><p class="intro" style="font-size:12px">Write assembly-like instructions below. The robots start on the same instruction and run independently, one instruction per clock tick.</p><div class="editorWrap"><div class="lines" id="lineNums" aria-hidden="true">1</div><textarea id="code" class="editor" spellcheck="false" aria-label="Robot program code"># Both robots execute this exact same program.
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Martian Rovers Puzzle · Programming Playground</title>
+    <style>
+      :root {
+        color-scheme: dark;
+        --bg: #08111e;
+        --panel: #101e30;
+        --panel2: #14263a;
+        --line: #294259;
+        --text: #edf6ff;
+        --muted: #a2b8ce;
+        --cyan: #5dd7ef;
+        --orange: #ffb36b;
+        --good: #73e3a5;
+        --danger: #ff8194;
+        --purple: #b6a1ff;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background:
+          radial-gradient(circle at 90% 0, #18344b 0, transparent 40%),
+          var(--bg);
+        color: var(--text);
+        font:
+          14px/1.5 system-ui,
+          -apple-system,
+          Segoe UI,
+          Arial,
+          sans-serif;
+      }
+      button,
+      select,
+      input,
+      textarea {
+        font: inherit;
+      }
+      button {
+        cursor: pointer;
+        border: 1px solid var(--line);
+        border-radius: 9px;
+        padding: 9px 13px;
+        background: #1a3248;
+        color: var(--text);
+        font-weight: 650;
+      }
+      button:hover:not(:disabled) {
+        border-color: var(--cyan);
+        background: #24415b;
+      }
+      button:disabled {
+        opacity: 0.42;
+        cursor: not-allowed;
+      }
+      button.primary {
+        background: #1b8197;
+        border-color: #54cee3;
+        color: #fff;
+      }
+      button.good {
+        background: #19644b;
+        border-color: #4db78c;
+      }
+      button.danger {
+        color: #ffd3dc;
+      }
+      button.small {
+        padding: 6px 9px;
+        font-size: 12px;
+      }
+      .shell {
+        max-width: 1600px;
+        margin: auto;
+        padding: 22px;
+      }
+      .header {
+        display: flex;
+        justify-content: space-between;
+        gap: 18px;
+        align-items: flex-start;
+        margin-bottom: 19px;
+      }
+      .eyebrow {
+        font-size: 11px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: var(--cyan);
+        font-weight: 800;
+      }
+      .header h1 {
+        font-size: clamp(24px, 3vw, 34px);
+        line-height: 1.1;
+        margin: 6px 0;
+      }
+      .subtitle {
+        margin: 0;
+        color: var(--muted);
+        max-width: 850px;
+      }
+      .header .pill {
+        border: 1px solid #426478;
+        border-radius: 30px;
+        padding: 7px 12px;
+        color: #b8edfb;
+        white-space: nowrap;
+      }
+      .layout {
+        display: grid;
+        grid-template-columns:
+          minmax(330px, 1.03fr) minmax(420px, 1.5fr)
+          minmax(285px, 0.9fr);
+        gap: 15px;
+        align-items: start;
+      }
+      .panel {
+        background: linear-gradient(140deg, #142439, #0c1a2b);
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        box-shadow: 0 12px 28px #0002;
+        overflow: hidden;
+      }
+      .panelHead {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        border-bottom: 1px solid var(--line);
+        padding: 13px 16px;
+      }
+      .panelHead h2 {
+        font-size: 15px;
+        margin: 0;
+      }
+      .panelHead small {
+        color: var(--muted);
+      }
+      .content {
+        padding: 15px;
+      }
+      .badge {
+        font-size: 11px;
+        border-radius: 15px;
+        padding: 3px 9px;
+        border: 1px solid #46617b;
+        color: #b7d5ec;
+        font-weight: 700;
+      }
+      .editorWrap {
+        display: flex;
+        min-height: 340px;
+        background: #081321;
+        border: 1px solid #35506a;
+        border-radius: 10px;
+        overflow: hidden;
+      }
+      .lines {
+        white-space: pre;
+        text-align: right;
+        padding: 13px 9px;
+        min-width: 35px;
+        color: #587891;
+        line-height: 23px;
+        user-select: none;
+        border-right: 1px solid #1c3349;
+        font:
+          13px/23px ui-monospace,
+          Consolas,
+          monospace;
+        overflow: hidden;
+      }
+      .editor {
+        resize: vertical;
+        min-height: 340px;
+        width: 100%;
+        padding: 13px 12px;
+        line-height: 23px;
+        border: 0;
+        background: transparent;
+        color: #e2f2ff;
+        outline: none;
+        white-space: pre;
+        tab-size: 2;
+        font:
+          13px/23px ui-monospace,
+          Consolas,
+          monospace;
+      }
+      .editor:focus {
+        box-shadow: inset 0 0 0 1px #4e98a9;
+      }
+      .row {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+      .row.between {
+        justify-content: space-between;
+      }
+      .btnbar {
+        margin-top: 12px;
+      }
+      .helpText {
+        color: var(--muted);
+        font-size: 12px;
+      }
+      .status {
+        border-radius: 9px;
+        padding: 10px 12px;
+        margin-top: 12px;
+        background: #162b3f;
+        color: #bcd3e4;
+        min-height: 44px;
+        border: 1px solid #324f65;
+      }
+      .status.ok {
+        color: #a0f4c6;
+        border-color: #328565;
+        background: #10382d;
+      }
+      .status.err {
+        color: #ffc1cb;
+        border-color: #a14d5f;
+        background: #3d202e;
+      }
+      .codeError {
+        font:
+          12px/1.6 ui-monospace,
+          monospace;
+        color: #ffc6cf;
+        white-space: pre-wrap;
+      }
+      .simTop {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+        margin-bottom: 12px;
+      }
+      .metric {
+        background: #0a1827;
+        border: 1px solid #264156;
+        border-radius: 9px;
+        padding: 10px;
+      }
+      .metric span {
+        color: var(--muted);
+        font-size: 11px;
+        display: block;
+      }
+      .metric strong {
+        font-size: 20px;
+        font-variant-numeric: tabular-nums;
+      }
+      .canvasWrap {
+        position: relative;
+        background: radial-gradient(circle at 50% 50%, #142c40 0, #091726 80%);
+        border: 1px solid #315069;
+        border-radius: 12px;
+        overflow: hidden;
+      }
+      canvas {
+        display: block;
+        width: 100%;
+        height: 310px;
+      }
+      .legend {
+        display: flex;
+        gap: 15px;
+        flex-wrap: wrap;
+        margin-top: 9px;
+        color: var(--muted);
+        font-size: 12px;
+      }
+      .dot {
+        display: inline-block;
+        width: 9px;
+        height: 9px;
+        border-radius: 50%;
+        margin-right: 5px;
+      }
+      .settings {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        margin-top: 15px;
+      }
+      .settings label {
+        color: var(--muted);
+        font-size: 12px;
+        display: block;
+      }
+      .settings input,
+      .settings select {
+        width: 100%;
+        margin-top: 5px;
+        color: var(--text);
+        background: #081827;
+        border: 1px solid #35526c;
+        border-radius: 8px;
+        padding: 8px;
+      }
+      .settings input[type="range"] {
+        padding: 0;
+        accent-color: var(--cyan);
+      }
+      .settings .wide {
+        grid-column: 1/-1;
+      }
+      .pcGrid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+        margin-top: 13px;
+      }
+      .pc {
+        border: 1px solid #304b63;
+        border-radius: 9px;
+        padding: 10px;
+        background: #0a1929;
+      }
+      .pc h3 {
+        font-size: 12px;
+        margin: 0 0 5px;
+      }
+      .pc p {
+        margin: 3px 0;
+        font:
+          12px/1.5 ui-monospace,
+          monospace;
+        color: #a8c4da;
+      }
+      .pc b {
+        color: white;
+      }
+      .log {
+        margin-top: 13px;
+        max-height: 165px;
+        overflow: auto;
+        background: #081725;
+        border: 1px solid #254258;
+        border-radius: 8px;
+        padding: 9px 11px;
+        font:
+          12px/1.65 ui-monospace,
+          monospace;
+        color: #b7cfe0;
+      }
+      .log p {
+        margin: 0;
+        border-bottom: 1px solid #182e40;
+        padding: 2px 0;
+      }
+      .log p:last-child {
+        border: 0;
+      }
+      .tabs {
+        display: flex;
+        gap: 5px;
+      }
+      .tabs button {
+        padding: 5px 9px;
+        font-size: 12px;
+      }
+      .tabs button.active {
+        background: #245168;
+        border-color: var(--cyan);
+      }
+      .tabPane {
+        display: none;
+      }
+      .tabPane.active {
+        display: block;
+      }
+      .intro {
+        margin: 0 0 13px;
+        color: #c6d9e9;
+      }
+      .instruction {
+        border: 1px solid #29465b;
+        border-radius: 9px;
+        margin-bottom: 9px;
+        padding: 10px;
+        background: #0b1b2b;
+      }
+      .instruction code {
+        color: #84e1fa;
+        font-weight: 800;
+      }
+      .instruction p {
+        margin: 5px 0 0;
+        color: #abc1d4;
+        font-size: 12px;
+      }
+      .instruction .example {
+        color: #e7c7ff;
+      }
+      .callout {
+        background: #213449;
+        border-left: 3px solid var(--cyan);
+        padding: 10px 12px;
+        border-radius: 7px;
+        margin: 12px 0;
+        font-size: 12px;
+        color: #cae1f2;
+      }
+      .tests {
+        margin-top: 14px;
+      }
+      .testResults {
+        max-height: 185px;
+        overflow: auto;
+        font-size: 12px;
+      }
+      .testCase {
+        padding: 7px 3px;
+        border-bottom: 1px solid #263f52;
+        display: flex;
+        justify-content: space-between;
+      }
+      .testPass {
+        color: var(--good);
+      }
+      .testFail {
+        color: var(--danger);
+      }
+      .hint {
+        display: none;
+        margin: 8px 0;
+        padding: 10px;
+        background: #112c3c;
+        border-radius: 7px;
+        color: #c9e6ef;
+        font-size: 12px;
+      }
+      .hint.show {
+        display: block;
+      }
+      .footer {
+        color: #799bb4;
+        font-size: 11px;
+        text-align: center;
+        margin: 18px 0;
+      }
+      .shortcut {
+        font:
+          11px ui-monospace,
+          monospace;
+        color: #a9c5d6;
+      }
+      .fullWidth {
+        width: 100%;
+      }
+      @media (max-width: 1250px) {
+        .layout {
+          grid-template-columns: 1fr 1fr;
+        }
+        .side {
+          grid-column: 1/-1;
+        }
+        .side .content {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 15px;
+        }
+        .side .tabs {
+          grid-column: 1/-1;
+        }
+        .side .tabPane {
+          grid-column: 1/-1;
+        }
+      }
+      @media (max-width: 760px) {
+        .shell {
+          padding: 10px;
+        }
+        .layout {
+          display: block;
+        }
+        .panel {
+          margin-bottom: 12px;
+        }
+        .side .content {
+          display: block;
+        }
+        .header .pill {
+          display: none;
+        }
+        .settings {
+          grid-template-columns: 1fr 1fr;
+        }
+        canvas {
+          height: 250px;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        * {
+          scroll-behavior: auto !important;
+        }
+      }
+
+      /* Collapsible mission briefing: entirely self-contained, with inline vector artwork. */
+      .mission {
+        margin: 0 0 19px;
+        background: linear-gradient(135deg, #182a3c, #102032);
+        border: 1px solid #5b5b64;
+        border-radius: 14px;
+        overflow: hidden;
+        box-shadow: 0 12px 28px #0002;
+      }
+      .mission summary {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 14px 17px;
+        cursor: pointer;
+        list-style: none;
+        user-select: none;
+      }
+      .mission summary::-webkit-details-marker {
+        display: none;
+      }
+      .mission summary:hover {
+        background: #ffffff08;
+      }
+      .mission summary:focus-visible {
+        outline: 2px solid var(--cyan);
+        outline-offset: -3px;
+      }
+      .missionIcon {
+        font-size: 22px;
+      }
+      .missionLabel {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+      }
+      .missionLabel strong {
+        font-size: 15px;
+      }
+      .missionLabel small {
+        color: var(--muted);
+        font-size: 12px;
+      }
+      .missionChevron {
+        font-size: 20px;
+        color: var(--orange);
+        transition: transform 0.2s;
+      }
+      .mission[open] .missionChevron {
+        transform: rotate(180deg);
+      }
+      .missionInner {
+        border-top: 1px solid var(--line);
+        padding: 16px 19px 20px;
+        display: grid;
+        grid-template-columns: minmax(240px, 0.95fr) minmax(350px, 1.3fr);
+        gap: 20px;
+        align-items: start;
+      }
+      .missionArt {
+        margin: 0;
+      }
+      .missionArt svg {
+        width: 100%;
+        height: auto;
+        display: block;
+        border-radius: 10px;
+        border: 1px solid #624a47;
+        background: #2d2730;
+      }
+      .missionArt figcaption {
+        font-size: 11px;
+        color: var(--muted);
+        margin-top: 6px;
+      }
+      .missionCopy h2 {
+        margin: 0 0 7px;
+        font-size: 20px;
+      }
+      .missionCopy h3 {
+        font-size: 14px;
+        color: #f7bf93;
+        margin: 14px 0 5px;
+      }
+      .missionCopy p {
+        margin: 0 0 9px;
+        color: #d4e1ec;
+      }
+      .missionCopy ul {
+        padding-left: 19px;
+        margin: 5px 0 12px;
+        color: #d4e1ec;
+      }
+      .missionCopy li {
+        margin: 3px 0;
+      }
+      .missionTag {
+        font-size: 11px;
+        letter-spacing: 1.4px;
+        color: #f7bf93;
+        font-weight: 800;
+      }
+      .missionGoal {
+        background: #233d49;
+        border-left: 3px solid var(--cyan);
+        padding: 10px 12px;
+        border-radius: 7px;
+        color: #eaf6fd;
+      }
+      .missionCopy .missionGoal {
+        margin-top: 10px;
+      }
+      @media (max-width: 830px) {
+        .missionInner {
+          grid-template-columns: 1fr;
+        }
+        .missionArt {
+          max-width: 680px;
+        }
+        .mission summary {
+          padding: 12px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="shell">
+      <header class="header">
+        <div>
+          <div class="eyebrow">Experis Academy · Algorithmic Reasoning Lab</div>
+          <h1>
+            Martian Rovers Puzzle
+            <span style="color: var(--cyan)">/</span> Coding Playground
+          </h1>
+          <p class="subtitle">
+            Two identical rovers. One shared program. An infinite number line.
+            Can you guarantee they rendezvous using only four CPU instructions?
+          </p>
+        </div>
+        <div class="pill">● Offline · Single HTML file</div>
+      </header>
+      <details class="mission" id="missionStory">
+        <summary>
+          <span class="missionIcon" aria-hidden="true">🪐</span
+          ><span class="missionLabel"
+            ><strong>Mission ARES · Background story</strong
+            ><small
+              >Expand to discover why the two Mars rovers must rendezvous</small
+            ></span
+          ><span class="missionChevron" aria-hidden="true">⌄</span>
+        </summary>
+        <div class="missionInner">
+          <img
+            src="rovers.jpg"
+            alt="Two Mars rovers on a rust-red Martian plain, with landing parachutes and distant hills under a dusty sky."
+            style="width: 100%; border-radius: 10px; border: 1px solid #624a47"
+          />
+
+          <div class="missionCopy">
+            <div class="missionTag">YEAR 2042 · MARS EXPLORATION</div>
+            <h2>Two rovers. One mission. One shared program.</h2>
+            <p>
+              Mission ARES sent two compact autonomous rovers,
+              <strong>ARES-1</strong> and <strong>ARES-2</strong>, designed to
+              dock together and assemble a larger, more capable exploration
+              vehicle.
+            </p>
+            <p>
+              During atmospheric entry, a navigation malfunction separated their
+              landing modules. Both landed safely at different, unknown
+              positions. Their parachutes remain on the surface as detectable
+              navigation landmarks.
+            </p>
+            <p>
+              Communication delays make direct control from Earth impractical.
+              Mission Control can upload
+              <strong>one identical CPU program</strong> to both rovers, which
+              must then operate independently.
+            </p>
+            <h3>Your engineering mission</h3>
+            <p>
+              Write the shared autonomous rendezvous program that gets the
+              rovers to meet and dock, regardless of their initial landing
+              positions. The simulation models travel along a one-dimensional
+              integer track; it is a programming abstraction of the Martian
+              terrain.
+            </p>
+            <ul>
+              <li>
+                Each rover can move left or right along a one-dimensional
+                integer track.
+              </li>
+              <li>
+                Neither rover knows its absolute position or the other's
+                position.
+              </li>
+              <li>The rovers cannot communicate with one another.</li>
+              <li>Each can sense a parachute only at its current location.</li>
+              <li>
+                Both execute the same four-instruction program, one instruction
+                per clock cycle.
+              </li>
+            </ul>
+            <p class="missionGoal">
+              <strong>Mission success:</strong> Both rovers meet and initiate
+              docking, forming the larger ARES exploration rover.
+            </p>
+            <p style="font-size: 12px; color: var(--muted); margin-top: 11px">
+              The simulation models travel along a one-dimensional integer
+              track; it is a programming abstraction of the Martian terrain.
+            </p>
+          </div>
+        </div>
+      </details>
+      <div class="layout">
+        <section class="panel">
+          <div class="panelHead">
+            <h2>01 / Program editor</h2>
+            <span class="badge">Shared by both rovers</span>
+          </div>
+          <div class="content">
+            <p class="intro" style="font-size: 12px">
+              Write assembly-like instructions below. The rovers start on the
+              same instruction and run independently, one instruction per clock
+              tick.
+            </p>
+            <div class="editorWrap">
+              <div class="lines" id="lineNums" aria-hidden="true">1</div>
+              <textarea
+                id="code"
+                class="editor"
+                spellcheck="false"
+                aria-label="Rover program code"
+              >
+# Both rovers execute this exact same program.
 # Replace this starter with your strategy.
 start: right
-goto start</textarea></div><div class="row btnbar"><button class="primary" id="compile">▶ Compile & reset</button><button id="sample">Starter code</button><button id="download">↓ Save .txt</button></div><div id="compileStatus" class="status" role="status" aria-live="polite">Edit your program, then compile to load it into both robot CPUs.</div><div class="callout"><b>Challenge constraint:</b> No variables, arithmetic, timers, or inter-robot messages. A robot senses a parachute only at its current position.</div><div class="row between"><span class="helpText">Tip: <span class="shortcut">Ctrl / ⌘ + Enter</span> compiles; Tab indents.</span><span class="helpText" id="codeStats">2 instructions</span></div></div></section>
-<section class="panel"><div class="panelHead"><h2>02 / Live simulation</h2><span class="badge" id="runBadge">READY</span></div><div class="content"><div class="simTop"><div class="metric"><span>Clock cycles</span><strong id="tickVal">0</strong></div><div class="metric"><span>Robot separation</span><strong id="distanceVal">8</strong></div><div class="metric"><span>Outcome</span><strong id="outcomeVal" style="font-size:15px">Not started</strong></div></div><div class="canvasWrap"><canvas id="world" height="310" aria-label="Animated number line with two robots and their fixed parachutes"></canvas></div><div class="legend"><span><i class="dot" style="background:var(--cyan)"></i>Robot A</span><span><i class="dot" style="background:var(--orange)"></i>Robot B</span><span>⚑ Fixed landing / parachute positions</span><span style="color:#84f1af">◆ Meeting</span></div><div class="row btnbar"><button class="primary" id="play">▶ Run</button><button id="step">⏭ Step +1</button><button id="pause">Ⅱ Pause</button><button id="reset">↺ Reset</button><button id="random">⚄ Randomize</button></div><div class="settings"><label>Robot A start<input id="startA" type="number" value="-4" min="-5000" max="5000" step="1"></label><label>Robot B start<input id="startB" type="number" value="4" min="-5000" max="5000" step="1"></label><label>Playback speed <span id="speedLabel">8 ticks/s</span><input id="speed" type="range" min="1" max="60" value="8"></label><label>Maximum cycles per run<input id="maxTicks" type="number" min="1" max="200000" value="2000"></label></div><div class="pcGrid"><div class="pc"><h3 style="color:var(--cyan)">● CPU A</h3><p>Position: <b id="posA">-4</b></p><p>Next line: <b id="pcA">—</b></p><p>Instruction: <b id="instA">—</b></p></div><div class="pc"><h3 style="color:var(--orange)">● CPU B</h3><p>Position: <b id="posB">4</b></p><p>Next line: <b id="pcB">—</b></p><p>Instruction: <b id="instB">—</b></p></div></div><div class="row between" style="margin-top:13px"><b style="font-size:12px">Execution trace</b><button class="small" id="clearLog">Clear log</button></div><div class="log" id="log" aria-live="polite">Compile a program to begin.</div><div class="tests"><div class="row between"><b style="font-size:13px">Automated verification</b><button class="good small" id="verify">✓ Test multiple starts</button></div><p class="helpText">Checks both left/right arrangements and different initial distances; finite tests are evidence, not a mathematical proof.</p><div id="testResults" class="testResults"></div></div></div></section>
-<aside class="panel side"><div class="panelHead"><h2>03 / Reference & guidance</h2><small>Student help</small></div><div class="content"><div class="tabs" role="tablist"><button class="active" data-tab="isa" role="tab" aria-selected="true">CPU ISA</button><button data-tab="rules" role="tab" aria-selected="false">Rules</button><button data-tab="hints" role="tab" aria-selected="false">Hints</button></div><div class="tabPane active" id="isa"><p class="intro" style="font-size:12px;margin-top:12px">Each instruction consumes <b>exactly one clock cycle</b>, including branches and sensor checks.</p><div class="instruction"><code>left</code><p>Move the executing robot one integer position to the left (−1).</p><p class="example">Example: 4 → 3</p></div><div class="instruction"><code>right</code><p>Move the executing robot one integer position to the right (+1).</p><p class="example">Example: 4 → 5</p></div><div class="instruction"><code>skipNext</code><p>If a parachute is on the robot's <b>current</b> cell, skip the next instruction. Otherwise, execute it normally on the following tick. Senses either parachute, including its own.</p><p class="example">On parachute: PC ← PC + 2; else PC ← PC + 1</p></div><div class="instruction"><code>goto label</code><p>Jump to a named label. No movement occurs during this tick.</p><p class="example">goto start</p></div><div class="instruction"><code>label: instruction</code><p>Names an instruction as a jump target. Labels and comments are free; instructions cost CPU cycles.</p><p class="example">loop: left</p></div><div class="callout">Allowed comments: <code>#</code> or <code>//</code>. Blank lines and label-only lines are supported. Commands are case-insensitive. No other commands are permitted.</div></div><div class="tabPane" id="rules"><p class="intro" style="font-size:12px;margin-top:12px">The task is to produce a single program that works regardless of which robot starts on the left and how far apart they land.</p><div class="instruction"><b>Initial conditions</b><p>Two robots land at distinct integer coordinates. Each parachute stays at its owner's original coordinate for the entire simulation.</p></div><div class="instruction"><b>Identical CPUs</b><p>Both execute the same compiled program, with separate program counters, synchronously. Every tick, both execute their next instruction based on the positions at the beginning of the tick.</p></div><div class="instruction"><b>Victory</b><p>They occupy the same coordinate or pass each other on the same edge during a tick (a continuous-motion encounter). Both halt when they meet.</p></div><div class="instruction"><b>Run limit</b><p>A run can time out; this does not establish impossibility. A program that falls off its end halts that robot and is flagged in the trace.</p></div><div class="callout">The coordinate display follows the robots and parachutes automatically. The line is logically unbounded; the canvas is only a viewport.</div></div><div class="tabPane" id="hints"><p class="intro" style="font-size:12px;margin-top:12px">Hints are progressively revealed. Try exploring the CPU timing first.</p><button class="small fullWidth" id="hintBtn">Reveal next hint</button><div id="hint1" class="hint">1. If both robots move in lockstep forever, their initial distance never changes. Think about what information breaks that symmetry.</div><div id="hint2" class="hint">2. A robot can detect a parachute it did not leave. Could that distinguish the one that started behind from the one in front?</div><div id="hint3" class="hint">3. All four instructions take a cycle. You can create different average movement speeds by spending some cycles on sensing or jumping rather than movement.</div><div id="hint4" class="hint">4. Consider a slow patrol loop. When a robot reaches the other landing point, its sensor can route it into a faster loop moving in the same direction.</div><p class="helpText">The reference intentionally does not include the complete solution.</p></div></div></aside>
-</div><p class="footer">Educational implementation of the classic two-parachuting-robots interview puzzle. Runs entirely in your browser; no external dependencies, accounts, or network requests.<br>Created by <strong>Muhammad Z</strong> · <a href="https://github.com/tryfinally" target="_blank" rel="noopener noreferrer" style="color:var(--cyan);text-decoration:underline">github.com/tryfinally</a></p></main>
-<script>
-(()=>{'use strict';
-const $=id=>document.getElementById(id), C=$('world'),ctx=C.getContext('2d');let compiled=null,state=null,timer=null,hintCount=0,logLines=[];
-const source=$('code');const starter='# Both robots execute this exact same program.\n# Replace this starter with your strategy.\nstart: right\ngoto start';
-function syncEditor(){const n=source.value.split('\n').length;$('lineNums').textContent=Array.from({length:n},(_,i)=>i+1).join('\n');$('codeStats').textContent=`${source.value.split('\n').filter(x=>x.trim()&&!/^\s*(#|\/\/)/.test(x)).length} non-comment lines`;$('lineNums').scrollTop=source.scrollTop;}
-source.addEventListener('input',()=>{syncEditor();$('compileStatus').className='status';$('compileStatus').textContent='Source changed. Compile to load updated program into both CPUs.'});source.addEventListener('scroll',()=>{$('lineNums').scrollTop=source.scrollTop});source.addEventListener('keydown',e=>{if(e.key==='Tab'){e.preventDefault();const a=source.selectionStart,b=source.selectionEnd;source.setRangeText('  ',a,b,'end');syncEditor()}if(e.key==='Enter'&&(e.ctrlKey||e.metaKey)){e.preventDefault();compileAndReset()}});syncEditor();
-function compile(text){const commands=[],labels=new Map(),errors=[],pending=[];text.split(/\r?\n/).forEach((raw,i)=>{let s=raw.replace(/#.*$|\/\/.*$/,'').trim(),line=i+1;if(!s)return;const m=s.match(/^([a-zA-Z_][\w]*):\s*(.*)$/);if(m){let key=m[1].toLowerCase();if(labels.has(key))errors.push(`Line ${line}: duplicate label "${m[1]}".`);else labels.set(key,commands.length);s=m[2].trim();if(!s)return;}if(/^(left|right|skipnext)$/i.test(s)){commands.push({op:s.toLowerCase(),line,raw:s});return}let g=s.match(/^goto\s+([a-zA-Z_][\w]*)$/i);if(g){commands.push({op:'goto',target:g[1].toLowerCase(),line,raw:s});pending.push(commands[commands.length-1]);return}errors.push(`Line ${line}: unknown instruction "${s}".`)});pending.forEach(c=>{if(!labels.has(c.target))errors.push(`Line ${c.line}: undefined label "${c.target}".`);else c.dest=labels.get(c.target)});if(!commands.length)errors.push('Program has no executable instructions.');for(let [key,index] of labels){if(index>=commands.length)errors.push(`Label "${key}" has no instruction after it.`)}if(errors.length)throw Error(errors.join('\n'));return commands}
-function positions(){let a=Number($('startA').value),b=Number($('startB').value);if(!Number.isSafeInteger(a)||!Number.isSafeInteger(b)||Math.abs(a)>5000||Math.abs(b)>5000||a===b)throw Error('Set distinct integer starting positions between −5000 and 5000.');return[a,b]}
-function maxCycles(){const n=Number($('maxTicks').value);if(!Number.isInteger(n)||n<1||n>200000)throw Error('Maximum cycles must be an integer from 1 to 200,000.');return n}
-function initial(a,b){return {bots:[{x:a,pc:0,halted:false},{x:b,pc:0,halted:false}],chutes:[a,b],tick:0,done:false,result:'Ready',meetingX:null,last:[],history:[[a,b]]}}
-function execute(s,program,limit){if(s.done)return;const old=s.bots.map(b=>b.x),actions=[];s.bots.forEach((bot,i)=>{if(bot.halted){actions.push('halted');return}const c=program[bot.pc];if(!c){bot.halted=true;actions.push('end of program');return}if(c.op==='left'){bot.x--;bot.pc++;actions.push(`L${c.line} left`)}else if(c.op==='right'){bot.x++;bot.pc++;actions.push(`L${c.line} right`)}else if(c.op==='goto'){bot.pc=c.dest;actions.push(`L${c.line} goto ${c.target}`)}else {const on=s.chutes.includes(old[i]);bot.pc+=on?2:1;actions.push(`L${c.line} skipNext ${on?'✓ parachute, skip':'✗ no parachute'}`)}});s.tick++;s.last=actions;s.history.push(s.bots.map(b=>b.x));if(s.history.length>200)s.history.shift();const[a,b]=s.bots;const coincide=a.x===b.x, crossed=old[0]===b.x&&old[1]===a.x&&Math.abs(old[0]-old[1])===1;if(coincide||crossed){s.done=true;s.result='Met!';s.meetingX=coincide?a.x:(old[0]+old[1])/2;s.meetingKind=coincide?'Same coordinate':'Crossed paths'}else if(a.halted&&b.halted){s.done=true;s.result='Both halted'}else if(s.tick>=limit){s.done=true;s.result='Cycle limit'}return actions}
-function stop(){if(timer){clearInterval(timer);timer=null}updateButtons()}
-function appendLog(str){logLines.push(str);if(logLines.length>60)logLines.shift();$('log').replaceChildren(...logLines.slice().reverse().map(s=>{const p=document.createElement('p');p.textContent=s;return p}))}
-function status(msg,type=''){$('compileStatus').className='status '+type;$('compileStatus').textContent=msg}
-function compileAndReset(){stop();try{compiled=compile(source.value);const [a,b]=positions();maxCycles();state=initial(a,b);logLines=[];appendLog(`${compiled.length} instructions compiled. Start A=${a}, B=${b}.`);status(`✓ Compiled ${compiled.length} instructions. Both CPUs loaded with the same program.`,'ok');$('testResults').textContent='';render();return true}catch(e){compiled=null;state=null;status(e.message,'err');render();return false}}
-function reset(){stop();if(!compiled){compileAndReset();return}try{let [a,b]=positions();maxCycles();state=initial(a,b);logLines=[];appendLog(`Reset positions: A=${a}, B=${b}`);render()}catch(e){status(e.message,'err')}}
-function doStep(){if(!compiled||!state){if(!compileAndReset())return}if(state.done){stop();return}const ac=execute(state,compiled,maxCycles());if(state.tick<=20||state.tick%10===0||state.done)appendLog(`T${state.tick} · A: ${ac[0]} · B: ${ac[1]} · x=${state.bots[0].x},${state.bots[1].x}`);if(state.done){stop();appendLog(state.result==='Met!'?`SUCCESS · ${state.meetingKind} at x=${state.meetingX}, tick ${state.tick}.`:`STOP · ${state.result} at tick ${state.tick}.`)}render()}
-function play(){if(!compiled||!state){if(!compileAndReset())return}if(state.done)return;stop();timer=setInterval(doStep,1000/Number($('speed').value));updateButtons()}
-function updateButtons(){let running=!!timer;$('play').disabled=running||!!state?.done;$('step').disabled=running||!!state?.done;$('pause').disabled=!running;$('runBadge').textContent=running?'RUNNING':!compiled?'NOT COMPILED':state?.result==='Met!'?'SUCCESS':state?.done?'STOPPED':'READY';$('runBadge').style.color=state?.result==='Met!'?'var(--good)':''}
-function render(){const s=state;$('tickVal').textContent=s?.tick??'0';$('distanceVal').textContent=s?Math.abs(s.bots[0].x-s.bots[1].x):'—';$('outcomeVal').textContent=s?.result??'Not compiled';$('outcomeVal').style.color=s?.result==='Met!'?'var(--good)':s?.done?'var(--orange)':'';for(let i=0;i<2;i++){const bot=s?.bots[i],c=bot&&compiled?.[bot.pc],id=i?'B':'A';$('pos'+id).textContent=bot?.x??'—';$('pc'+id).textContent=bot?(c?c.line:'HALT'):'—';$('inst'+id).textContent=bot?(bot.halted?'HALTED':c?.raw??'end'):'—'}updateButtons();draw()}
-function draw(){const dpr=window.devicePixelRatio||1,r=C.getBoundingClientRect(),w=Math.max(200,r.width),h=Math.max(200,r.height);if(C.width!==Math.round(w*dpr)||C.height!==Math.round(h*dpr)){C.width=Math.round(w*dpr);C.height=Math.round(h*dpr)}ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,w,h);const s=state||initial(-4,4),vals=[...s.chutes,...s.bots.map(b=>b.x)],mn=Math.min(...vals),mx=Math.max(...vals),span=Math.max(12,mx-mn+6),cx=(mn+mx)/2,scale=Math.min(55,(w-90)/span),x=v=>w/2+(v-cx)*scale,y=h*.55;ctx.strokeStyle='#2d465b';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(25,y);ctx.lineTo(w-25,y);ctx.stroke();const tickStep=Math.max(1,Math.ceil(27/scale));ctx.font='11px ui-monospace,monospace';ctx.textAlign='center';for(let v=Math.ceil((cx-(w/2-22)/scale)/tickStep)*tickStep;v<cx+(w/2-22)/scale;v+=tickStep){let px=x(v);ctx.strokeStyle=v===0?'#6e899e':'#2d465b';ctx.beginPath();ctx.moveTo(px,y-6);ctx.lineTo(px,y+6);ctx.stroke();ctx.fillStyle='#7899b1';ctx.fillText(v,px,y+22)}const cs=['#5dd7ef','#ffb36b'];s.chutes.forEach((p,i)=>{let px=x(p);ctx.strokeStyle=cs[i];ctx.globalAlpha=.55;ctx.setLineDash([3,4]);ctx.beginPath();ctx.moveTo(px,40);ctx.lineTo(px,y);ctx.stroke();ctx.setLineDash([]);ctx.globalAlpha=1;ctx.font='20px sans-serif';ctx.fillText('⚑',px,59);ctx.font='11px sans-serif';ctx.fillStyle=cs[i];ctx.fillText(`${i?'B':'A'} chute · ${p}`,px,77)});s.history.forEach((pos,j)=>{if(j%Math.max(1,Math.ceil(s.history.length/35)))return;pos.forEach((p,i)=>{ctx.beginPath();ctx.fillStyle=cs[i];ctx.globalAlpha=.05+.21*j/s.history.length;ctx.arc(x(p),y+(i?24:-24),3.2,0,Math.PI*2);ctx.fill()})});ctx.globalAlpha=1;s.bots.forEach((b,i)=>{let px=x(b.x),py=y+(i?19:-19);ctx.fillStyle=cs[i];ctx.strokeStyle='#e9fbff';ctx.lineWidth=1.7;ctx.beginPath();ctx.roundRect(px-14,py-12,28,24,6);ctx.fill();ctx.stroke();ctx.fillStyle='#092135';ctx.font='bold 12px sans-serif';ctx.fillText(i?'B':'A',px,py+4);ctx.fillStyle=cs[i];ctx.font='12px ui-monospace,monospace';ctx.fillText(`x=${b.x}`,px,py+(i?29:-19))});if(s.meetingX!==null){let px=x(s.meetingX);ctx.fillStyle='#91f5b3';ctx.font='24px sans-serif';ctx.fillText('◆',px,y-56);ctx.font='bold 12px sans-serif';ctx.fillText('RENDEZVOUS',px,y-75)}ctx.fillStyle='#7796ad';ctx.font='11px sans-serif';ctx.textAlign='left';ctx.fillText('AUTOMATIC VIEWPORT · INTEGER WORLD',12,h-13)}
-function tests(){stop();let program;try{program=compile(source.value)}catch(e){status(e.message,'err');return}const pairs=[[-1,1],[1,-1],[0,1],[1,0],[-5,5],[5,-5],[0,7],[7,0],[-12,3],[3,-12],[-32,32],[32,-32],[-75,25],[25,-75],[-100,100],[100,-100]],limit=maxCycles();let results=pairs.map(([a,b])=>{let s=initial(a,b);while(!s.done)execute(s,program,limit);return{a,b,t:s.tick,pass:s.result==='Met!',result:s.result}}),passed=results.filter(r=>r.pass).length;const summary=document.createElement('div');summary.className='status '+(passed===results.length?'ok':'err');summary.textContent=`${passed} / ${results.length} scenarios passed · limit ${limit} cycles per scenario.`;const cont=$('testResults');cont.replaceChildren(summary,...results.map(r=>{const d=document.createElement('div');d.className='testCase';const name=document.createElement('span');name.textContent=`A=${r.a}, B=${r.b}`;const result=document.createElement('b');result.className=r.pass?'testPass':'testFail';result.textContent=r.pass?`✓ ${r.t} cycles`:`✗ ${r.result}`;d.append(name,result);return d}));appendLog(`Verification: ${passed}/${results.length} scenarios met.`)}
-$('compile').onclick=compileAndReset;$('play').onclick=play;$('step').onclick=doStep;$('pause').onclick=stop;$('reset').onclick=reset;$('random').onclick=()=>{const a=Math.floor(Math.random()*51)-25,d=1+Math.floor(Math.random()*30),b=a+(Math.random()<.5?-d:d);$('startA').value=a;$('startB').value=b;reset()};$('sample').onclick=()=>{source.value=starter;syncEditor();compileAndReset()};$('download').onclick=()=>{let url=URL.createObjectURL(new Blob([source.value+'\n'],{type:'text/plain'})),a=document.createElement('a');a.href=url;a.download='parachute_robot_program.txt';a.click();URL.revokeObjectURL(url)};$('verify').onclick=()=>{try{tests()}catch(e){status(e.message,'err')}};$('clearLog').onclick=()=>{logLines=[];$('log').textContent='Trace cleared.'};$('speed').oninput=()=>{$('speedLabel').textContent=$('speed').value+' ticks/s';if(timer)play()};for(let id of ['startA','startB','maxTicks'])$(id).addEventListener('change',()=>{if(id==='maxTicks'){try{maxCycles()}catch(e){status(e.message,'err')}return}reset()});document.querySelectorAll('[data-tab]').forEach(btn=>btn.onclick=()=>{document.querySelectorAll('[data-tab]').forEach(b=>{b.classList.toggle('active',b===btn);b.setAttribute('aria-selected',b===btn?'true':'false')});document.querySelectorAll('.tabPane').forEach(p=>p.classList.toggle('active',p.id===btn.dataset.tab))});$('hintBtn').onclick=()=>{hintCount=Math.min(4,hintCount+1);for(let i=1;i<=hintCount;i++)$('hint'+i).classList.add('show');if(hintCount===4)$('hintBtn').disabled=true};window.addEventListener('resize',draw);compileAndReset();
-})();
-</script></body></html>
+goto start</textarea
+              >
+            </div>
+            <div class="row btnbar">
+              <button class="primary" id="compile">▶ Compile & reset</button
+              ><button id="sample">Starter code</button
+              ><button id="download">↓ Save .txt</button>
+            </div>
+            <div
+              id="compileStatus"
+              class="status"
+              role="status"
+              aria-live="polite"
+            >
+              Edit your program, then compile to load it into both rover CPUs.
+            </div>
+            <div class="callout">
+              <b>Challenge constraint:</b> No variables, arithmetic, timers, or
+              inter-rover messages. A rover senses a parachute only at its
+              current position.
+            </div>
+            <div class="row between">
+              <span class="helpText"
+                >Tip: <span class="shortcut">Ctrl / ⌘ + Enter</span> compiles;
+                Tab indents.</span
+              ><span class="helpText" id="codeStats">2 instructions</span>
+            </div>
+          </div>
+        </section>
+        <section class="panel">
+          <div class="panelHead">
+            <h2>02 / Live simulation</h2>
+            <span class="badge" id="runBadge">READY</span>
+          </div>
+          <div class="content">
+            <div class="simTop">
+              <div class="metric">
+                <span>Clock cycles</span><strong id="tickVal">0</strong>
+              </div>
+              <div class="metric">
+                <span>Rover separation</span><strong id="distanceVal">8</strong>
+              </div>
+              <div class="metric">
+                <span>Outcome</span
+                ><strong id="outcomeVal" style="font-size: 15px"
+                  >Not started</strong
+                >
+              </div>
+            </div>
+            <div class="canvasWrap">
+              <canvas
+                id="world"
+                height="310"
+                aria-label="Animated number line with two rovers and their fixed parachutes"
+              ></canvas>
+            </div>
+            <div class="legend">
+              <span
+                ><i class="dot" style="background: var(--cyan)"></i>Rover
+                A</span
+              ><span
+                ><i class="dot" style="background: var(--orange)"></i>Rover
+                B</span
+              ><span>⚑ Fixed landing / parachute positions</span
+              ><span style="color: #84f1af">◆ Meeting</span>
+            </div>
+            <div class="row btnbar">
+              <button class="primary" id="play">▶ Run</button
+              ><button id="step">⏭ Step +1</button
+              ><button id="pause">Ⅱ Pause</button
+              ><button id="reset">↺ Reset</button
+              ><button id="random">⚄ Randomize</button>
+            </div>
+            <div class="settings">
+              <label
+                >Rover A start<input
+                  id="startA"
+                  type="number"
+                  value="-4"
+                  min="-5000"
+                  max="5000"
+                  step="1" /></label
+              ><label
+                >Rover B start<input
+                  id="startB"
+                  type="number"
+                  value="4"
+                  min="-5000"
+                  max="5000"
+                  step="1" /></label
+              ><label
+                >Playback speed <span id="speedLabel">8 ticks/s</span
+                ><input
+                  id="speed"
+                  type="range"
+                  min="1"
+                  max="60"
+                  value="8" /></label
+              ><label
+                >Maximum cycles per run<input
+                  id="maxTicks"
+                  type="number"
+                  min="1"
+                  max="200000"
+                  value="2000"
+              /></label>
+            </div>
+            <div class="pcGrid">
+              <div class="pc">
+                <h3 style="color: var(--cyan)">● CPU A</h3>
+                <p>Position: <b id="posA">-4</b></p>
+                <p>Next line: <b id="pcA">—</b></p>
+                <p>Instruction: <b id="instA">—</b></p>
+              </div>
+              <div class="pc">
+                <h3 style="color: var(--orange)">● CPU B</h3>
+                <p>Position: <b id="posB">4</b></p>
+                <p>Next line: <b id="pcB">—</b></p>
+                <p>Instruction: <b id="instB">—</b></p>
+              </div>
+            </div>
+            <div class="row between" style="margin-top: 13px">
+              <b style="font-size: 12px">Execution trace</b
+              ><button class="small" id="clearLog">Clear log</button>
+            </div>
+            <div class="log" id="log" aria-live="polite">
+              Compile a program to begin.
+            </div>
+            <div class="tests">
+              <div class="row between">
+                <b style="font-size: 13px">Automated verification</b
+                ><button class="good small" id="verify">
+                  ✓ Test multiple starts
+                </button>
+              </div>
+              <p class="helpText">
+                Checks both left/right arrangements and different initial
+                distances; finite tests are evidence, not a mathematical proof.
+              </p>
+              <div id="testResults" class="testResults"></div>
+            </div>
+          </div>
+        </section>
+        <aside class="panel side">
+          <div class="panelHead">
+            <h2>03 / Reference & guidance</h2>
+            <small>Student help</small>
+          </div>
+          <div class="content">
+            <div class="tabs" role="tablist">
+              <button
+                class="active"
+                data-tab="isa"
+                role="tab"
+                aria-selected="true"
+              >
+                CPU ISA</button
+              ><button data-tab="rules" role="tab" aria-selected="false">
+                Rules</button
+              ><button data-tab="hints" role="tab" aria-selected="false">
+                Hints
+              </button>
+            </div>
+            <div class="tabPane active" id="isa">
+              <p class="intro" style="font-size: 12px; margin-top: 12px">
+                Each instruction consumes <b>exactly one clock cycle</b>,
+                including branches and sensor checks.
+              </p>
+              <div class="instruction">
+                <code>left</code>
+                <p>
+                  Move the executing rover one integer position to the left
+                  (−1).
+                </p>
+                <p class="example">Example: 4 → 3</p>
+              </div>
+              <div class="instruction">
+                <code>right</code>
+                <p>
+                  Move the executing rover one integer position to the right
+                  (+1).
+                </p>
+                <p class="example">Example: 4 → 5</p>
+              </div>
+              <div class="instruction">
+                <code>skipNext</code>
+                <p>
+                  If a parachute is on the rover's <b>current</b> cell, skip the
+                  next instruction. Otherwise, execute it normally on the
+                  following tick. Senses either parachute, including its own.
+                </p>
+                <p class="example">
+                  On parachute: PC ← PC + 2; else PC ← PC + 1
+                </p>
+              </div>
+              <div class="instruction">
+                <code>goto label</code>
+                <p>
+                  Jump to a named label. No movement occurs during this tick.
+                </p>
+                <p class="example">goto start</p>
+              </div>
+              <div class="instruction">
+                <code>label: instruction</code>
+                <p>
+                  Names an instruction as a jump target. Labels and comments are
+                  free; instructions cost CPU cycles.
+                </p>
+                <p class="example">loop: left</p>
+              </div>
+              <div class="callout">
+                Allowed comments: <code>#</code> or <code>//</code>. Blank lines
+                and label-only lines are supported. Commands are
+                case-insensitive. No other commands are permitted.
+              </div>
+            </div>
+            <div class="tabPane" id="rules">
+              <p class="intro" style="font-size: 12px; margin-top: 12px">
+                The task is to produce a single program that works regardless of
+                which rover starts on the left and how far apart they land.
+              </p>
+              <div class="instruction">
+                <b>Initial conditions</b>
+                <p>
+                  Two rovers land at distinct integer coordinates. Each
+                  parachute stays at its owner's original coordinate for the
+                  entire simulation.
+                </p>
+              </div>
+              <div class="instruction">
+                <b>Identical CPUs</b>
+                <p>
+                  Both execute the same compiled program, with separate program
+                  counters, synchronously. Every tick, both execute their next
+                  instruction based on the positions at the beginning of the
+                  tick.
+                </p>
+              </div>
+              <div class="instruction">
+                <b>Victory</b>
+                <p>
+                  They occupy the same coordinate or pass each other on the same
+                  edge during a tick (a continuous-motion encounter). Both halt
+                  when they meet.
+                </p>
+              </div>
+              <div class="instruction">
+                <b>Run limit</b>
+                <p>
+                  A run can time out; this does not establish impossibility. A
+                  program that falls off its end halts that rover and is flagged
+                  in the trace.
+                </p>
+              </div>
+              <div class="callout">
+                The coordinate display follows the rovers and parachutes
+                automatically. The line is logically unbounded; the canvas is
+                only a viewport.
+              </div>
+            </div>
+            <div class="tabPane" id="hints">
+              <p class="intro" style="font-size: 12px; margin-top: 12px">
+                Hints are progressively revealed. Try exploring the CPU timing
+                first.
+              </p>
+              <button class="small fullWidth" id="hintBtn">
+                Reveal next hint
+              </button>
+              <div id="hint1" class="hint">
+                1. If both rovers move in lockstep forever, their initial
+                distance never changes. Think about what information breaks that
+                symmetry.
+              </div>
+              <div id="hint2" class="hint">
+                2. A rover can detect a parachute it did not leave. Could that
+                distinguish the one that started behind from the one in front?
+              </div>
+              <div id="hint3" class="hint">
+                3. All four instructions take a cycle. You can create different
+                average movement speeds by spending some cycles on sensing or
+                jumping rather than movement.
+              </div>
+              <div id="hint4" class="hint">
+                4. Consider a slow patrol loop. When a rover reaches the other
+                landing point, its sensor can route it into a faster loop moving
+                in the same direction.
+              </div>
+              <p class="helpText">
+                The reference intentionally does not include the complete
+                solution.
+              </p>
+            </div>
+          </div>
+        </aside>
+      </div>
+      <p class="footer">
+        Educational Mars-themed adaptation of the classic two-parachute
+        rendezvous interview puzzle. Runs entirely in your browser; no external
+        dependencies, accounts, or network requests.<br />Created by
+        <strong>Muhammad Z</strong> ·
+        <a
+          href="https://github.com/tryfinally"
+          target="_blank"
+          rel="noopener noreferrer"
+          style="color: var(--cyan); text-decoration: underline"
+          >github.com/tryfinally</a
+        >
+      </p>
+    </main>
+    <script>
+      (() => {
+        "use strict";
+        const $ = (id) => document.getElementById(id),
+          C = $("world"),
+          ctx = C.getContext("2d");
+        let compiled = null,
+          state = null,
+          timer = null,
+          hintCount = 0,
+          logLines = [];
+        const source = $("code");
+        const starter =
+          "# Both rovers execute this exact same program.\n# Replace this starter with your strategy.\nstart: right\ngoto start";
+        function syncEditor() {
+          const n = source.value.split("\n").length;
+          $("lineNums").textContent = Array.from(
+            { length: n },
+            (_, i) => i + 1,
+          ).join("\n");
+          $("codeStats").textContent =
+            `${source.value.split("\n").filter((x) => x.trim() && !/^\s*(#|\/\/)/.test(x)).length} non-comment lines`;
+          $("lineNums").scrollTop = source.scrollTop;
+        }
+        source.addEventListener("input", () => {
+          syncEditor();
+          $("compileStatus").className = "status";
+          $("compileStatus").textContent =
+            "Source changed. Compile to load updated program into both CPUs.";
+        });
+        source.addEventListener("scroll", () => {
+          $("lineNums").scrollTop = source.scrollTop;
+        });
+        source.addEventListener("keydown", (e) => {
+          if (e.key === "Tab") {
+            e.preventDefault();
+            const a = source.selectionStart,
+              b = source.selectionEnd;
+            source.setRangeText("  ", a, b, "end");
+            syncEditor();
+          }
+          if (e.key === "Enter" && (e.ctrlKey || e.metaKey)) {
+            e.preventDefault();
+            compileAndReset();
+          }
+        });
+        syncEditor();
+        function compile(text) {
+          const commands = [],
+            labels = new Map(),
+            errors = [],
+            pending = [];
+          text.split(/\r?\n/).forEach((raw, i) => {
+            let s = raw.replace(/#.*$|\/\/.*$/, "").trim(),
+              line = i + 1;
+            if (!s) return;
+            const m = s.match(/^([a-zA-Z_][\w]*):\s*(.*)$/);
+            if (m) {
+              let key = m[1].toLowerCase();
+              if (labels.has(key))
+                errors.push(`Line ${line}: duplicate label "${m[1]}".`);
+              else labels.set(key, commands.length);
+              s = m[2].trim();
+              if (!s) return;
+            }
+            if (/^(left|right|skipnext)$/i.test(s)) {
+              commands.push({ op: s.toLowerCase(), line, raw: s });
+              return;
+            }
+            let g = s.match(/^goto\s+([a-zA-Z_][\w]*)$/i);
+            if (g) {
+              commands.push({
+                op: "goto",
+                target: g[1].toLowerCase(),
+                line,
+                raw: s,
+              });
+              pending.push(commands[commands.length - 1]);
+              return;
+            }
+            errors.push(`Line ${line}: unknown instruction "${s}".`);
+          });
+          pending.forEach((c) => {
+            if (!labels.has(c.target))
+              errors.push(`Line ${c.line}: undefined label "${c.target}".`);
+            else c.dest = labels.get(c.target);
+          });
+          if (!commands.length)
+            errors.push("Program has no executable instructions.");
+          for (let [key, index] of labels) {
+            if (index >= commands.length)
+              errors.push(`Label "${key}" has no instruction after it.`);
+          }
+          if (errors.length) throw Error(errors.join("\n"));
+          return commands;
+        }
+        function positions() {
+          let a = Number($("startA").value),
+            b = Number($("startB").value);
+          if (
+            !Number.isSafeInteger(a) ||
+            !Number.isSafeInteger(b) ||
+            Math.abs(a) > 5000 ||
+            Math.abs(b) > 5000 ||
+            a === b
+          )
+            throw Error(
+              "Set distinct integer starting positions between −5000 and 5000.",
+            );
+          return [a, b];
+        }
+        function maxCycles() {
+          const n = Number($("maxTicks").value);
+          if (!Number.isInteger(n) || n < 1 || n > 200000)
+            throw Error("Maximum cycles must be an integer from 1 to 200,000.");
+          return n;
+        }
+        function initial(a, b) {
+          return {
+            bots: [
+              { x: a, pc: 0, halted: false },
+              { x: b, pc: 0, halted: false },
+            ],
+            chutes: [a, b],
+            tick: 0,
+            done: false,
+            result: "Ready",
+            meetingX: null,
+            last: [],
+            history: [[a, b]],
+          };
+        }
+        function execute(s, program, limit) {
+          if (s.done) return;
+          const old = s.bots.map((b) => b.x),
+            actions = [];
+          s.bots.forEach((bot, i) => {
+            if (bot.halted) {
+              actions.push("halted");
+              return;
+            }
+            const c = program[bot.pc];
+            if (!c) {
+              bot.halted = true;
+              actions.push("end of program");
+              return;
+            }
+            if (c.op === "left") {
+              bot.x--;
+              bot.pc++;
+              actions.push(`L${c.line} left`);
+            } else if (c.op === "right") {
+              bot.x++;
+              bot.pc++;
+              actions.push(`L${c.line} right`);
+            } else if (c.op === "goto") {
+              bot.pc = c.dest;
+              actions.push(`L${c.line} goto ${c.target}`);
+            } else {
+              const on = s.chutes.includes(old[i]);
+              bot.pc += on ? 2 : 1;
+              actions.push(
+                `L${c.line} skipNext ${on ? "✓ parachute, skip" : "✗ no parachute"}`,
+              );
+            }
+          });
+          s.tick++;
+          s.last = actions;
+          s.history.push(s.bots.map((b) => b.x));
+          if (s.history.length > 200) s.history.shift();
+          const [a, b] = s.bots;
+          const coincide = a.x === b.x,
+            crossed =
+              old[0] === b.x &&
+              old[1] === a.x &&
+              Math.abs(old[0] - old[1]) === 1;
+          if (coincide || crossed) {
+            s.done = true;
+            s.result = "Met!";
+            s.meetingX = coincide ? a.x : (old[0] + old[1]) / 2;
+            s.meetingKind = coincide ? "Same coordinate" : "Crossed paths";
+          } else if (a.halted && b.halted) {
+            s.done = true;
+            s.result = "Both halted";
+          } else if (s.tick >= limit) {
+            s.done = true;
+            s.result = "Cycle limit";
+          }
+          return actions;
+        }
+        function stop() {
+          if (timer) {
+            clearInterval(timer);
+            timer = null;
+          }
+          updateButtons();
+        }
+        function appendLog(str) {
+          logLines.push(str);
+          if (logLines.length > 60) logLines.shift();
+          $("log").replaceChildren(
+            ...logLines
+              .slice()
+              .reverse()
+              .map((s) => {
+                const p = document.createElement("p");
+                p.textContent = s;
+                return p;
+              }),
+          );
+        }
+        function status(msg, type = "") {
+          $("compileStatus").className = "status " + type;
+          $("compileStatus").textContent = msg;
+        }
+        function compileAndReset() {
+          stop();
+          try {
+            compiled = compile(source.value);
+            const [a, b] = positions();
+            maxCycles();
+            state = initial(a, b);
+            logLines = [];
+            appendLog(
+              `${compiled.length} instructions compiled. Start A=${a}, B=${b}.`,
+            );
+            status(
+              `✓ Compiled ${compiled.length} instructions. Both CPUs loaded with the same program.`,
+              "ok",
+            );
+            $("testResults").textContent = "";
+            render();
+            return true;
+          } catch (e) {
+            compiled = null;
+            state = null;
+            status(e.message, "err");
+            render();
+            return false;
+          }
+        }
+        function reset() {
+          stop();
+          if (!compiled) {
+            compileAndReset();
+            return;
+          }
+          try {
+            let [a, b] = positions();
+            maxCycles();
+            state = initial(a, b);
+            logLines = [];
+            appendLog(`Reset positions: A=${a}, B=${b}`);
+            render();
+          } catch (e) {
+            status(e.message, "err");
+          }
+        }
+        function doStep() {
+          if (!compiled || !state) {
+            if (!compileAndReset()) return;
+          }
+          if (state.done) {
+            stop();
+            return;
+          }
+          const ac = execute(state, compiled, maxCycles());
+          if (state.tick <= 20 || state.tick % 10 === 0 || state.done)
+            appendLog(
+              `T${state.tick} · A: ${ac[0]} · B: ${ac[1]} · x=${state.bots[0].x},${state.bots[1].x}`,
+            );
+          if (state.done) {
+            stop();
+            appendLog(
+              state.result === "Met!"
+                ? `SUCCESS · ${state.meetingKind} at x=${state.meetingX}, tick ${state.tick}.`
+                : `STOP · ${state.result} at tick ${state.tick}.`,
+            );
+          }
+          render();
+        }
+        function play() {
+          if (!compiled || !state) {
+            if (!compileAndReset()) return;
+          }
+          if (state.done) return;
+          stop();
+          timer = setInterval(doStep, 1000 / Number($("speed").value));
+          updateButtons();
+        }
+        function updateButtons() {
+          let running = !!timer;
+          $("play").disabled = running || !!state?.done;
+          $("step").disabled = running || !!state?.done;
+          $("pause").disabled = !running;
+          $("runBadge").textContent = running
+            ? "RUNNING"
+            : !compiled
+              ? "NOT COMPILED"
+              : state?.result === "Met!"
+                ? "SUCCESS"
+                : state?.done
+                  ? "STOPPED"
+                  : "READY";
+          $("runBadge").style.color =
+            state?.result === "Met!" ? "var(--good)" : "";
+        }
+        function render() {
+          const s = state;
+          $("tickVal").textContent = s?.tick ?? "0";
+          $("distanceVal").textContent = s
+            ? Math.abs(s.bots[0].x - s.bots[1].x)
+            : "—";
+          $("outcomeVal").textContent = s?.result ?? "Not compiled";
+          $("outcomeVal").style.color =
+            s?.result === "Met!"
+              ? "var(--good)"
+              : s?.done
+                ? "var(--orange)"
+                : "";
+          for (let i = 0; i < 2; i++) {
+            const bot = s?.bots[i],
+              c = bot && compiled?.[bot.pc],
+              id = i ? "B" : "A";
+            $("pos" + id).textContent = bot?.x ?? "—";
+            $("pc" + id).textContent = bot ? (c ? c.line : "HALT") : "—";
+            $("inst" + id).textContent = bot
+              ? bot.halted
+                ? "HALTED"
+                : (c?.raw ?? "end")
+              : "—";
+          }
+          updateButtons();
+          draw();
+        }
+        function draw() {
+          const dpr = window.devicePixelRatio || 1,
+            r = C.getBoundingClientRect(),
+            w = Math.max(200, r.width),
+            h = Math.max(200, r.height);
+          if (
+            C.width !== Math.round(w * dpr) ||
+            C.height !== Math.round(h * dpr)
+          ) {
+            C.width = Math.round(w * dpr);
+            C.height = Math.round(h * dpr);
+          }
+          ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+          ctx.clearRect(0, 0, w, h);
+          const s = state || initial(-4, 4),
+            vals = [...s.chutes, ...s.bots.map((b) => b.x)],
+            mn = Math.min(...vals),
+            mx = Math.max(...vals),
+            span = Math.max(12, mx - mn + 6),
+            cx = (mn + mx) / 2,
+            scale = Math.min(55, (w - 90) / span),
+            x = (v) => w / 2 + (v - cx) * scale,
+            y = h * 0.55;
+          ctx.strokeStyle = "#2d465b";
+          ctx.lineWidth = 2;
+          ctx.beginPath();
+          ctx.moveTo(25, y);
+          ctx.lineTo(w - 25, y);
+          ctx.stroke();
+          const tickStep = Math.max(1, Math.ceil(27 / scale));
+          ctx.font = "11px ui-monospace,monospace";
+          ctx.textAlign = "center";
+          for (
+            let v =
+              Math.ceil((cx - (w / 2 - 22) / scale) / tickStep) * tickStep;
+            v < cx + (w / 2 - 22) / scale;
+            v += tickStep
+          ) {
+            let px = x(v);
+            ctx.strokeStyle = v === 0 ? "#6e899e" : "#2d465b";
+            ctx.beginPath();
+            ctx.moveTo(px, y - 6);
+            ctx.lineTo(px, y + 6);
+            ctx.stroke();
+            ctx.fillStyle = "#7899b1";
+            ctx.fillText(v, px, y + 22);
+          }
+          const cs = ["#5dd7ef", "#ffb36b"];
+          s.chutes.forEach((p, i) => {
+            let px = x(p);
+            ctx.strokeStyle = cs[i];
+            ctx.globalAlpha = 0.55;
+            ctx.setLineDash([3, 4]);
+            ctx.beginPath();
+            ctx.moveTo(px, 40);
+            ctx.lineTo(px, y);
+            ctx.stroke();
+            ctx.setLineDash([]);
+            ctx.globalAlpha = 1;
+            ctx.font = "20px sans-serif";
+            ctx.fillText("⚑", px, 59);
+            ctx.font = "11px sans-serif";
+            ctx.fillStyle = cs[i];
+            ctx.fillText(`${i ? "B" : "A"} chute · ${p}`, px, 77);
+          });
+          s.history.forEach((pos, j) => {
+            if (j % Math.max(1, Math.ceil(s.history.length / 35))) return;
+            pos.forEach((p, i) => {
+              ctx.beginPath();
+              ctx.fillStyle = cs[i];
+              ctx.globalAlpha = 0.05 + (0.21 * j) / s.history.length;
+              ctx.arc(x(p), y + (i ? 24 : -24), 3.2, 0, Math.PI * 2);
+              ctx.fill();
+            });
+          });
+          ctx.globalAlpha = 1;
+          s.bots.forEach((b, i) => {
+            let px = x(b.x),
+              py = y + (i ? 19 : -19);
+            ctx.fillStyle = cs[i];
+            ctx.strokeStyle = "#e9fbff";
+            ctx.lineWidth = 1.7;
+            ctx.beginPath();
+            ctx.roundRect(px - 14, py - 12, 28, 24, 6);
+            ctx.fill();
+            ctx.stroke();
+            ctx.fillStyle = "#092135";
+            ctx.font = "bold 12px sans-serif";
+            ctx.fillText(i ? "B" : "A", px, py + 4);
+            ctx.fillStyle = cs[i];
+            ctx.font = "12px ui-monospace,monospace";
+            ctx.fillText(`x=${b.x}`, px, py + (i ? 29 : -19));
+          });
+          if (s.meetingX !== null) {
+            let px = x(s.meetingX);
+            ctx.fillStyle = "#91f5b3";
+            ctx.font = "24px sans-serif";
+            ctx.fillText("◆", px, y - 56);
+            ctx.font = "bold 12px sans-serif";
+            ctx.fillText("RENDEZVOUS", px, y - 75);
+          }
+          ctx.fillStyle = "#7796ad";
+          ctx.font = "11px sans-serif";
+          ctx.textAlign = "left";
+          ctx.fillText("AUTOMATIC VIEWPORT · INTEGER WORLD", 12, h - 13);
+        }
+        function tests() {
+          stop();
+          let program;
+          try {
+            program = compile(source.value);
+          } catch (e) {
+            status(e.message, "err");
+            return;
+          }
+          const pairs = [
+              [-1, 1],
+              [1, -1],
+              [0, 1],
+              [1, 0],
+              [-5, 5],
+              [5, -5],
+              [0, 7],
+              [7, 0],
+              [-12, 3],
+              [3, -12],
+              [-32, 32],
+              [32, -32],
+              [-75, 25],
+              [25, -75],
+              [-100, 100],
+              [100, -100],
+            ],
+            limit = maxCycles();
+          let results = pairs.map(([a, b]) => {
+              let s = initial(a, b);
+              while (!s.done) execute(s, program, limit);
+              return {
+                a,
+                b,
+                t: s.tick,
+                pass: s.result === "Met!",
+                result: s.result,
+              };
+            }),
+            passed = results.filter((r) => r.pass).length;
+          const summary = document.createElement("div");
+          summary.className =
+            "status " + (passed === results.length ? "ok" : "err");
+          summary.textContent = `${passed} / ${results.length} scenarios passed · limit ${limit} cycles per scenario.`;
+          const cont = $("testResults");
+          cont.replaceChildren(
+            summary,
+            ...results.map((r) => {
+              const d = document.createElement("div");
+              d.className = "testCase";
+              const name = document.createElement("span");
+              name.textContent = `A=${r.a}, B=${r.b}`;
+              const result = document.createElement("b");
+              result.className = r.pass ? "testPass" : "testFail";
+              result.textContent = r.pass ? `✓ ${r.t} cycles` : `✗ ${r.result}`;
+              d.append(name, result);
+              return d;
+            }),
+          );
+          appendLog(`Verification: ${passed}/${results.length} scenarios met.`);
+        }
+        $("compile").onclick = compileAndReset;
+        $("play").onclick = play;
+        $("step").onclick = doStep;
+        $("pause").onclick = stop;
+        $("reset").onclick = reset;
+        $("random").onclick = () => {
+          const a = Math.floor(Math.random() * 51) - 25,
+            d = 1 + Math.floor(Math.random() * 30),
+            b = a + (Math.random() < 0.5 ? -d : d);
+          $("startA").value = a;
+          $("startB").value = b;
+          reset();
+        };
+        $("sample").onclick = () => {
+          source.value = starter;
+          syncEditor();
+          compileAndReset();
+        };
+        $("download").onclick = () => {
+          let url = URL.createObjectURL(
+              new Blob([source.value + "\n"], { type: "text/plain" }),
+            ),
+            a = document.createElement("a");
+          a.href = url;
+          a.download = "parachute_robot_program.txt";
+          a.click();
+          URL.revokeObjectURL(url);
+        };
+        $("verify").onclick = () => {
+          try {
+            tests();
+          } catch (e) {
+            status(e.message, "err");
+          }
+        };
+        $("clearLog").onclick = () => {
+          logLines = [];
+          $("log").textContent = "Trace cleared.";
+        };
+        $("speed").oninput = () => {
+          $("speedLabel").textContent = $("speed").value + " ticks/s";
+          if (timer) play();
+        };
+        for (let id of ["startA", "startB", "maxTicks"])
+          $(id).addEventListener("change", () => {
+            if (id === "maxTicks") {
+              try {
+                maxCycles();
+              } catch (e) {
+                status(e.message, "err");
+              }
+              return;
+            }
+            reset();
+          });
+        document.querySelectorAll("[data-tab]").forEach(
+          (btn) =>
+            (btn.onclick = () => {
+              document.querySelectorAll("[data-tab]").forEach((b) => {
+                b.classList.toggle("active", b === btn);
+                b.setAttribute("aria-selected", b === btn ? "true" : "false");
+              });
+              document
+                .querySelectorAll(".tabPane")
+                .forEach((p) =>
+                  p.classList.toggle("active", p.id === btn.dataset.tab),
+                );
+            }),
+        );
+        $("hintBtn").onclick = () => {
+          hintCount = Math.min(4, hintCount + 1);
+          for (let i = 1; i <= hintCount; i++)
+            $("hint" + i).classList.add("show");
+          if (hintCount === 4) $("hintBtn").disabled = true;
+        };
+        window.addEventListener("resize", draw);
+        compileAndReset();
+      })();
+    </script>
+  </body>
+</html>
