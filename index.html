@@ -98,6 +98,35 @@
         line-height: 1.1;
         margin: 6px 0;
       }
+      .authorLine {
+        display: flex;
+        gap: 14px;
+        align-items: center;
+        flex-wrap: wrap;
+        margin: 7px 0 6px;
+        color: #b9cfe1;
+        font-size: 12px;
+      }
+      .authorLine span,
+      .authorLine a {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .authorLine a {
+        color: #b9cfe1;
+        text-decoration: none;
+      }
+      .authorLine a:hover {
+        color: var(--cyan);
+        text-decoration: underline;
+      }
+      .authorLine svg {
+        width: 15px;
+        height: 15px;
+        fill: currentColor;
+        flex: 0 0 auto;
+      }
       .subtitle {
         margin: 0;
         color: var(--muted);
@@ -112,9 +141,10 @@
       }
       .layout {
         display: grid;
-        grid-template-columns:
-          minmax(330px, 1.03fr) minmax(420px, 1.5fr)
-          minmax(285px, 0.9fr);
+        grid-template-columns: minmax(330px, 1.03fr) minmax(
+            420px,
+            1.5fr
+          ) minmax(285px, 0.9fr);
         gap: 15px;
         align-items: start;
       }
@@ -150,6 +180,14 @@
         border: 1px solid #46617b;
         color: #b7d5ec;
         font-weight: 700;
+      }
+      .badge.active {
+        color: #a0f4c6;
+        border-color: #328565;
+        background: #10382d;
+        box-shadow:
+          0 0 0 1px #73e3a522,
+          0 0 14px #73e3a51c;
       }
       .editorWrap {
         display: flex;
@@ -616,6 +654,50 @@
       .missionCopy .missionGoal {
         margin-top: 10px;
       }
+      .missionConstraint {
+        margin-top: 10px;
+        background: #3b2d2b;
+        border-left: 3px solid var(--orange);
+        padding: 10px 12px;
+        border-radius: 7px;
+        color: #ffe4cf;
+        font-size: 12px;
+      }
+      .isaBrief {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 7px;
+        margin: 7px 0 12px;
+      }
+      .isaBrief div {
+        background: #0c1c2b;
+        border: 1px solid #304b61;
+        border-radius: 8px;
+        padding: 8px 10px;
+        color: #cfe0ed;
+        font-size: 12px;
+      }
+      .isaBrief code {
+        color: #84e1fa;
+        font-weight: 800;
+      }
+      .missionAccept {
+        grid-column: 1/-1;
+        display: flex;
+        justify-content: center;
+        padding-top: 2px;
+      }
+      .missionAccept button {
+        min-width: 210px;
+        padding: 10px 18px;
+        background: #19644b;
+        border-color: #4db78c;
+        font-size: 13px;
+      }
+      .missionAccept button:hover {
+        background: #237a5e;
+        border-color: #73e3a5;
+      }
       @media (max-width: 830px) {
         .missionInner {
           grid-template-columns: 1fr;
@@ -625,6 +707,9 @@
         }
         .mission summary {
           padding: 12px;
+        }
+        .isaBrief {
+          grid-template-columns: 1fr;
         }
       }
     </style>
@@ -638,6 +723,35 @@
             Martian Rovers Puzzle
             <span style="color: var(--cyan)">/</span> Coding Playground
           </h1>
+          <div class="authorLine" aria-label="Author attribution">
+            <span title="Author"
+              ><svg viewBox="0 0 24 24" aria-hidden="true">
+                <path
+                  d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10Zm0 2c-5 0-9 2.5-9 5.5V22h18v-2.5C21 16.5 17 14 12 14Z"
+                /></svg
+              >Muhammad Zahalqa</span
+            ><a
+              href="https://github.com/tryfinally"
+              target="_blank"
+              rel="noopener noreferrer"
+              title="GitHub"
+              ><svg viewBox="0 0 24 24" aria-hidden="true">
+                <path
+                  d="M12 .7a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2.3c-3.4.7-4.1-1.4-4.1-1.4-.6-1.4-1.4-1.8-1.4-1.8-1.1-.8.1-.8.1-.8 1.3.1 1.9 1.3 1.9 1.3 1.1 1.9 2.9 1.4 3.6 1.1.1-.8.4-1.4.8-1.7-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.3-3.2-.1-.3-.6-1.6.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17.5 5.3 18.5 5.6 18.5 5.6c.7 1.6.2 2.9.1 3.2.8.9 1.3 1.9 1.3 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .7Z"
+                /></svg
+              >github.com/tryfinally</a
+            ><a
+              href="https://twitter.com/tryfinally"
+              target="_blank"
+              rel="noopener noreferrer"
+              title="Twitter"
+              ><svg viewBox="0 0 24 24" aria-hidden="true">
+                <path
+                  d="M18.2 2.3h3.7l-8 9.2L23.3 22h-7.4l-5.8-7.6L3.5 22H-.2l8.6-9.8L-.6 2.3h7.6l5.2 6.9 6-6.9Zm-1.3 17.8H19L5.9 4.1H3.7l13.2 16Z"
+                /></svg
+              >@tryfinally</a
+            >
+          </div>
           <p class="subtitle">
             Two identical rovers. One shared program. An infinite number line.
             Can you guarantee they rendezvous using only four CPU instructions?
@@ -645,14 +759,12 @@
         </div>
         <div class="pill">● Offline · Single HTML file</div>
       </header>
-      <details class="mission" id="missionStory">
+      <details class="mission" id="missionStory" open>
         <summary>
           <span class="missionIcon" aria-hidden="true">🪐</span
           ><span class="missionLabel"
             ><strong>Mission ARES · Background story</strong
-            ><small
-              >Expand to discover why the two Mars rovers must rendezvous</small
-            ></span
+            ><small>Mission context, constraints and rover CPU ISA</small></span
           ><span class="missionChevron" aria-hidden="true">⌄</span>
         </summary>
         <div class="missionInner">
@@ -661,7 +773,6 @@
             alt="Two Mars rovers on a rust-red Martian plain, with landing parachutes and distant hills under a dusty sky."
             style="width: 100%; border-radius: 10px; border: 1px solid #624a47"
           />
-
           <div class="missionCopy">
             <div class="missionTag">YEAR 2042 · MARS EXPLORATION</div>
             <h2>Two rovers. One mission. One shared program.</h2>
@@ -687,15 +798,9 @@
             <p>
               Write the shared autonomous rendezvous program that gets the
               rovers to meet and dock, regardless of their initial landing
-              positions. The simulation models travel along a one-dimensional
-              integer track; it is a programming abstraction of the Martian
-              terrain.
+              positions.
             </p>
             <ul>
-              <li>
-                Each rover can move left or right along a one-dimensional
-                integer track.
-              </li>
               <li>
                 Neither rover knows its absolute position or the other's
                 position.
@@ -707,10 +812,31 @@
                 per clock cycle.
               </li>
             </ul>
+            <h3>Rover CPU · brief ISA</h3>
+            <div class="isaBrief">
+              <div><code>left</code> — move one cell left.</div>
+              <div><code>right</code> — move one cell right.</div>
+              <div>
+                <code>skipNext</code> — if standing on a parachute, skip the
+                next instruction.
+              </div>
+              <div>
+                <code>goto label</code> — jump to a labeled instruction.
+              </div>
+            </div>
             <p class="missionGoal">
               <strong>Mission success:</strong> Both rovers meet and initiate
               docking, forming the larger ARES exploration rover.
             </p>
+            <p style="font-size: 12px; color: var(--muted); margin-top: 11px">
+              The simulation models travel along a one-dimensional integer
+              track; it is a programming abstraction of the Martian terrain.
+            </p>
+          </div>
+          <div class="missionAccept">
+            <button id="acceptChallenge" type="button">
+              Challenge Accepted!
+            </button>
           </div>
         </div>
       </details>
@@ -741,8 +867,7 @@ goto start</textarea
               >
             </div>
             <div class="row btnbar">
-              <button class="primary" id="compile">▶ Compile & reset</button
-              ><button id="sample">Starter code</button
+              <button class="primary" id="compile">▶ Compile & Upload</button
               ><button id="download">↓ Save .txt</button>
             </div>
             <div
@@ -751,12 +876,7 @@ goto start</textarea
               role="status"
               aria-live="polite"
             >
-              Edit your program, then compile to load it into both rover CPUs.
-            </div>
-            <div class="callout">
-              <b>Challenge constraint:</b> No variables, arithmetic, timers, or
-              inter-rover messages. A rover senses a parachute only at its
-              current position.
+              Edit your program, then Compile & Upload it into both rover CPUs.
             </div>
             <div class="row between">
               <span class="helpText"
@@ -769,7 +889,7 @@ goto start</textarea
         <section class="panel">
           <div class="panelHead">
             <h2>02 / Live simulation</h2>
-            <span class="badge" id="runBadge">READY</span>
+            <span class="badge" id="runBadge">NOT UPLOADED</span>
           </div>
           <div class="content">
             <div class="simTop">
@@ -1035,15 +1155,7 @@ goto start</textarea
       <p class="footer">
         Educational Mars-themed adaptation of the classic two-parachute
         rendezvous interview puzzle. Runs entirely in your browser; no external
-        dependencies, accounts, or network requests.<br />Created by
-        <strong>Muhammad Z</strong> ·
-        <a
-          href="https://github.com/tryfinally"
-          target="_blank"
-          rel="noopener noreferrer"
-          style="color: var(--cyan); text-decoration: underline"
-          >github.com/tryfinally</a
-        >
+        dependencies, accounts, or network requests.
       </p>
     </main>
     <script>
@@ -1071,10 +1183,14 @@ goto start</textarea
           $("lineNums").scrollTop = source.scrollTop;
         }
         source.addEventListener("input", () => {
+          stop();
+          compiled = null;
+          state = null;
           syncEditor();
           $("compileStatus").className = "status";
           $("compileStatus").textContent =
-            "Source changed. Compile to load updated program into both CPUs.";
+            "Source changed. Compile & Upload to load the updated program into both rover CPUs.";
+          render();
         });
         source.addEventListener("scroll", () => {
           $("lineNums").scrollTop = source.scrollTop;
@@ -1270,10 +1386,10 @@ goto start</textarea
             state = initial(a, b);
             logLines = [];
             appendLog(
-              `${compiled.length} instructions compiled. Start A=${a}, B=${b}.`,
+              `${compiled.length} instructions compiled & uploaded. Start A=${a}, B=${b}.`,
             );
             status(
-              `✓ Compiled ${compiled.length} instructions. Both CPUs loaded with the same program.`,
+              `✓ Compiled & uploaded ${compiled.length} instructions. Both rover CPUs are ready.`,
               "ok",
             );
             $("testResults").textContent = "";
@@ -1290,7 +1406,8 @@ goto start</textarea
         function reset() {
           stop();
           if (!compiled) {
-            compileAndReset();
+            state = null;
+            render();
             return;
           }
           try {
@@ -1305,9 +1422,7 @@ goto start</textarea
           }
         }
         function doStep() {
-          if (!compiled || !state) {
-            if (!compileAndReset()) return;
-          }
+          if (!compiled || !state) return;
           if (state.done) {
             stop();
             return;
@@ -1328,23 +1443,22 @@ goto start</textarea
           render();
         }
         function play() {
-          if (!compiled || !state) {
-            if (!compileAndReset()) return;
-          }
-          if (state.done) return;
+          if (!compiled || !state || state.done) return;
           stop();
           timer = setInterval(doStep, 1000 / Number($("speed").value));
           updateButtons();
         }
         function updateButtons() {
-          let running = !!timer;
-          $("play").disabled = running || !!state?.done;
-          $("step").disabled = running || !!state?.done;
+          let running = !!timer,
+            uploaded = !!compiled && !!state;
+          $("play").disabled = !uploaded || running || !!state?.done;
+          $("step").disabled = !uploaded || running || !!state?.done;
           $("pause").disabled = !running;
+          $("runBadge").classList.toggle("active", uploaded);
           $("runBadge").textContent = running
             ? "RUNNING"
-            : !compiled
-              ? "NOT COMPILED"
+            : !uploaded
+              ? "NOT UPLOADED"
               : state?.result === "Met!"
                 ? "SUCCESS"
                 : state?.done
@@ -1561,10 +1675,11 @@ goto start</textarea
           $("startB").value = b;
           reset();
         };
-        $("sample").onclick = () => {
-          source.value = starter;
-          syncEditor();
-          compileAndReset();
+        $("acceptChallenge").onclick = () => {
+          $("missionStory").open = false;
+          document
+            .querySelector(".layout")
+            .scrollIntoView({ behavior: "smooth", block: "start" });
         };
         $("download").onclick = () => {
           let url = URL.createObjectURL(
@@ -1572,7 +1687,7 @@ goto start</textarea
             ),
             a = document.createElement("a");
           a.href = url;
-          a.download = "parachute_robot_program.txt";
+          a.download = "martian_rover_program.txt";
           a.click();
           URL.revokeObjectURL(url);
         };
@@ -1624,7 +1739,7 @@ goto start</textarea
           if (hintCount === 4) $("hintBtn").disabled = true;
         };
         window.addEventListener("resize", draw);
-        compileAndReset();
+        render();
       })();
     </script>
   </body>
